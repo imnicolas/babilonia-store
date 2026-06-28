@@ -40,7 +40,6 @@ namespace BABILONIA.Views
       List<Producto> todos = productoService.GetAllProductos();
       List<Producto> ordenados = todos.OrderBy(p => p.Stock - p.StockMinimo).ToList();
       cmbProducto.DataSource = ordenados;
-      cmbProducto.DisplayMember = "ToString";
       cmbProducto.ValueMember = "IdProducto";
     }
 

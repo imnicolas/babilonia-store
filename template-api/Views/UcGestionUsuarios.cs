@@ -28,6 +28,8 @@ namespace BABILONIA.Views
 
     private void CargarDatos()
     {
+      int? idActual = usuarioSeleccionado?.Id;
+
       listaUsuarios = usuarioService.GetAllUsuarios();
       listaRoles = rolService.GetAllRoles();
       listaPermisos = permisoService.GetAllPermisos();
@@ -36,30 +38,56 @@ namespace BABILONIA.Views
       lstUsuarios.DataSource = listaUsuarios;
       lstUsuarios.DisplayMember = "Legajo";
 
-      cmbRol.DataSource = null;
-      cmbRol.DataSource = listaRoles;
-      cmbRol.DisplayMember = "NombreRol";
+      lstRoles.DataSource = null;
+      lstRoles.DataSource = new List<Rol>(listaRoles);
+      lstRoles.DisplayMember = "NombreRol";
 
-      CargarArbolPermisos();
+      clbPermisos.Items.Clear();
+      foreach (Permiso p in listaPermisos)
+        clbPermisos.Items.Add(p.Nombre);
+
+      // Re-seleccionar el usuario anterior si corresponde
+      if (idActual.HasValue)
+      {
+        int idx = listaUsuarios.FindIndex(u => u.Id == idActual.Value);
+        if (idx >= 0)
+        {
+          lstUsuarios.SelectedIndex = idx;
+          return;
+        }
+      }
+
+      tvPermisos.Nodes.Clear();
     }
 
-    // Visualizacion del arbol de permisos usando patron Composite
+    // Visualizacion del arbol de permisos del usuario seleccionado (patron Composite)
     private void CargarArbolPermisos()
     {
       tvPermisos.Nodes.Clear();
+      if (usuarioSeleccionado == null) return;
 
-      foreach (Rol rol in listaRoles)
+      foreach (ComponenteAcceso comp in usuarioSeleccionado.Permisos)
       {
-        TreeNode nodoRol = new TreeNode(rol.NombreRol);
-        nodoRol.Tag = rol;
-        foreach (ComponenteAcceso hijo in rol.ObtenerHijos())
+        if (comp is Rol r)
         {
-          TreeNode nodoPermiso = new TreeNode(hijo.Nombre);
-          nodoPermiso.Tag = hijo;
-          nodoRol.Nodes.Add(nodoPermiso);
+          TreeNode nodoRol = new TreeNode(r.NombreRol);
+          nodoRol.Tag = r;
+          foreach (ComponenteAcceso hijo in r.ObtenerHijos())
+          {
+            TreeNode nodoP = new TreeNode(hijo.Nombre);
+            nodoP.Tag = hijo;
+            nodoRol.Nodes.Add(nodoP);
+          }
+          tvPermisos.Nodes.Add(nodoRol);
         }
-        tvPermisos.Nodes.Add(nodoRol);
+        else if (comp is Permiso p)
+        {
+          TreeNode nodoP = new TreeNode(p.Nombre);
+          nodoP.Tag = p;
+          tvPermisos.Nodes.Add(nodoP);
+        }
       }
+
       tvPermisos.ExpandAll();
     }
 
@@ -69,13 +97,112 @@ namespace BABILONIA.Views
       usuarioSeleccionado = u;
       txtLegajo.Text = u.Legajo;
       txtEmail.Text = u.Email;
-
-      // Marcar el rol asignado en el combo
-      Rol? rolAsignado = listaRoles.FirstOrDefault(r => u.Permisos.OfType<Rol>().Any(ur => ur.NombreRol == r.NombreRol));
-      if (rolAsignado != null)
-        cmbRol.SelectedItem = rolAsignado;
-
       chkBloqueado.Checked = u.Bloqueado;
+      CargarArbolPermisos();
+    }
+
+    // Asignar el rol seleccionado en lstRoles al usuario seleccionado
+    private void BtnAsignarRol_Click(object sender, EventArgs e)
+    {
+      if (usuarioSeleccionado == null)
+      {
+        MessageBox.Show("Seleccione un usuario de la lista.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        return;
+      }
+      if (lstRoles.SelectedItem is not Rol rolSeleccionado)
+      {
+        MessageBox.Show("Seleccione un rol de la lista.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        return;
+      }
+
+      bool yaLoTiene = usuarioSeleccionado.Permisos.OfType<Rol>().Any(r => r.Id == rolSeleccionado.Id);
+      if (yaLoTiene)
+      {
+        MessageBox.Show($"El usuario ya tiene el rol '{rolSeleccionado.NombreRol}'.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        return;
+      }
+
+      try
+      {
+        usuarioSeleccionado.Permisos.Add(rolSeleccionado);
+        usuarioService.UpdateUsuario(usuarioSeleccionado);
+        CargarDatos();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("Error al asignar rol: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+    }
+
+    // Quitar el rol seleccionado en lstRoles del usuario seleccionado
+    private void BtnQuitarRol_Click(object sender, EventArgs e)
+    {
+      if (usuarioSeleccionado == null)
+      {
+        MessageBox.Show("Seleccione un usuario de la lista.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        return;
+      }
+      if (lstRoles.SelectedItem is not Rol rolSeleccionado)
+      {
+        MessageBox.Show("Seleccione el rol a quitar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        return;
+      }
+
+      int removidos = usuarioSeleccionado.Permisos.RemoveAll(p => p is Rol r && r.Id == rolSeleccionado.Id);
+      if (removidos == 0)
+      {
+        MessageBox.Show($"El usuario no tiene el rol '{rolSeleccionado.NombreRol}'.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        return;
+      }
+
+      try
+      {
+        usuarioService.UpdateUsuario(usuarioSeleccionado);
+        CargarDatos();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("Error al quitar rol: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+    }
+
+    // Crear un nuevo Rol con los permisos marcados en clbPermisos
+    private void BtnCrearRol_Click(object sender, EventArgs e)
+    {
+      if (string.IsNullOrWhiteSpace(txtNombreRol.Text))
+      {
+        MessageBox.Show("Ingrese el nombre del rol.", "Validacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        return;
+      }
+      if (clbPermisos.CheckedItems.Count == 0)
+      {
+        MessageBox.Show("Seleccione al menos un permiso para el rol.", "Validacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        return;
+      }
+
+      try
+      {
+        Rol nuevoRol = new Rol { NombreRol = txtNombreRol.Text.Trim() };
+
+        foreach (string nombrePermiso in clbPermisos.CheckedItems.Cast<string>())
+        {
+          Permiso p = listaPermisos.FirstOrDefault(x => x.Nombre == nombrePermiso);
+          if (p != null) nuevoRol.Agregar(p);
+        }
+
+        rolService.CreateRol(nuevoRol);
+        MessageBox.Show($"Rol '{nuevoRol.NombreRol}' creado exitosamente.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        txtNombreRol.Clear();
+        for (int i = 0; i < clbPermisos.Items.Count; i++)
+          clbPermisos.SetItemChecked(i, false);
+
+        CargarDatos();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("Error al crear rol: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
     }
 
     private void BtnGuardar_Click(object sender, EventArgs e)
@@ -90,7 +217,7 @@ namespace BABILONIA.Views
       {
         if (usuarioSeleccionado == null)
         {
-          // Nuevo usuario
+          // Nuevo usuario: se crea con el rol seleccionado en lstRoles (si hay uno)
           Usuario nuevo = new Usuario
           {
             Legajo = txtLegajo.Text.Trim(),
@@ -99,24 +226,20 @@ namespace BABILONIA.Views
             Bloqueado = false
           };
 
-          if (cmbRol.SelectedItem is Rol rolSeleccionado)
-            nuevo.Permisos.Add(rolSeleccionado);
+          if (lstRoles.SelectedItem is Rol rolInicial)
+            nuevo.Permisos.Add(rolInicial);
 
           usuarioService.RegisterUsuario(nuevo, "1234");
-          MessageBox.Show("Usuario creado con contraseña por defecto '1234'.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          MessageBox.Show("Usuario creado con contraseña por defecto '1234'.\nUse los botones + / - para asignar o quitar roles.",
+            "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
-          // Actualizar usuario existente
+          // Actualizar datos del usuario (email y estado de bloqueo)
           usuarioSeleccionado.Email = txtEmail.Text.Trim();
           usuarioSeleccionado.Bloqueado = chkBloqueado.Checked;
-          usuarioSeleccionado.IntentosFallidos = usuarioSeleccionado.Bloqueado ? usuarioSeleccionado.IntentosFallidos : 0;
-
-          if (cmbRol.SelectedItem is Rol rolSeleccionado)
-          {
-            usuarioSeleccionado.Permisos.RemoveAll(p => p is Rol);
-            usuarioSeleccionado.Permisos.Insert(0, rolSeleccionado);
-          }
+          if (!usuarioSeleccionado.Bloqueado)
+            usuarioSeleccionado.IntentosFallidos = 0;
 
           usuarioService.UpdateUsuario(usuarioSeleccionado);
           MessageBox.Show("Usuario actualizado correctamente.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -160,10 +283,11 @@ namespace BABILONIA.Views
     private void LimpiarFormulario()
     {
       usuarioSeleccionado = null;
+      txtLegajo.ReadOnly = false;
       txtLegajo.Clear();
       txtEmail.Clear();
       chkBloqueado.Checked = false;
-      txtLegajo.ReadOnly = false;
+      tvPermisos.Nodes.Clear();
     }
   }
 }

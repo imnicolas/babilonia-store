@@ -25,22 +25,33 @@ namespace BABILONIA.Views
 
     private void CargarProveedores()
     {
+      List<Proveedor> proveedores = proveedorService.GetAllProveedores();
       cmbProveedor.DataSource = null;
-      cmbProveedor.DataSource = proveedorService.GetAllProveedores();
-      cmbProveedor.DisplayMember = "ToString";
+      cmbProveedor.DataSource = proveedores;
+      cmbProveedor.DisplayMember = "Nombre";
       cmbProveedor.ValueMember = "IdProveedor";
     }
 
     private void CargarPagos()
     {
-      dgvPagos.DataSource = null;
-      dgvPagos.DataSource = pagoService.GetAllPagos().OrderByDescending(p => p.Fecha).ToList();
+      List<Pago> pagos = pagoService.GetAllPagos().OrderByDescending(p => p.Fecha).ToList();
+      List<Proveedor> proveedores = proveedorService.GetAllProveedores();
+
+      dgvPagos.DataSource = pagos.Select(p => new
+      {
+        N = p.IdPago,
+        Proveedor = proveedores.FirstOrDefault(pv => pv.IdProveedor == p.IdProveedor)?.Nombre ?? "-",
+        Fecha = p.Fecha.ToString("dd/MM/yyyy HH:mm"),
+        Monto = $"$ {p.Monto:N2}",
+        p.MedioPago,
+        p.Descripcion
+      }).ToList();
     }
 
     private void CmbProveedor_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (cmbProveedor.SelectedItem is Proveedor proveedor)
-        lblDeuda.Text = $"Deuda actual: {proveedor.Deuda:C2}";
+        lblDeuda.Text = $"Deuda actual: $ {proveedor.Deuda:N2}";
     }
 
     private void BtnRegistrarPago_Click(object sender, EventArgs e)
@@ -59,7 +70,7 @@ namespace BABILONIA.Views
           cmbMedioPago.Text,
           txtDescripcion.Text);
 
-        MessageBox.Show($"Pago de {pago.Monto:C2} registrado para {proveedor.Nombre}.\nRecibo N° {pago.IdPago}.",
+        MessageBox.Show($"Pago de $ {pago.Monto:N2} registrado para {proveedor.Nombre}.\nRecibo N° {pago.IdPago}.",
           "Pago Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         txtDescripcion.Clear();

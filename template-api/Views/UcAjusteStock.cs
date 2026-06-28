@@ -26,7 +26,6 @@ namespace BABILONIA.Views
     {
       cmbProducto.DataSource = null;
       cmbProducto.DataSource = productoService.GetAllProductos();
-      cmbProducto.DisplayMember = "ToString";
       cmbProducto.ValueMember = "IdProducto";
     }
 

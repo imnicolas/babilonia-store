@@ -37,7 +37,6 @@ namespace BABILONIA.Views
     {
       cmbProducto.DataSource = null;
       cmbProducto.DataSource = productoService.GetAllProductos();
-      cmbProducto.DisplayMember = "ToString";
       cmbProducto.ValueMember = "IdProducto";
     }
 
@@ -75,11 +74,10 @@ namespace BABILONIA.Views
         Producto p = productos.FirstOrDefault(x => x.IdProducto == i.IdProducto);
         return new
         {
-          Modelo = p?.Modelo,
-          Talle = p?.Talle,
-          Precio = p?.Precio.ToString("C2"),
+          Producto = p?.ToString(),
+          Precio = $"$ {p?.Precio:N2}",
           Cantidad = i.Cantidad,
-          Subtotal = ((p?.Precio ?? 0) * i.Cantidad).ToString("C2"),
+          Subtotal = $"$ {(p?.Precio ?? 0) * i.Cantidad:N2}",
           i.IdProducto
         };
       }).ToList();
@@ -103,7 +101,7 @@ namespace BABILONIA.Views
         Venta venta = ventaService.RegistrarVenta(cliente.IdCliente, itemsVenta, cmbMedioPago.Text);
 
         string msg = $"Venta N° {venta.IdVenta} registrada exitosamente.\n" +
-                     $"Total: {venta.Total:C2}\n" +
+                     $"Total: $ {venta.Total:N2}\n" +
                      (venta.TieneDescuentoJubilacion ? "Se aplicó descuento del 15% por jubilación." : string.Empty);
 
         MessageBox.Show(msg, "Venta Confirmada", MessageBoxButtons.OK, MessageBoxIcon.Information);

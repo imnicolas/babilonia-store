@@ -38,11 +38,9 @@ namespace BABILONIA.Views
     {
       List<Producto> productos = productoService.GetAllProductos();
       cmbDevuelto.DataSource = new List<Producto>(productos);
-      cmbDevuelto.DisplayMember = "ToString";
       cmbDevuelto.ValueMember = "IdProducto";
 
       cmbNuevo.DataSource = new List<Producto>(productos);
-      cmbNuevo.DisplayMember = "ToString";
       cmbNuevo.ValueMember = "IdProducto";
     }
 

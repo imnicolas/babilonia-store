@@ -1,4 +1,4 @@
-namespace BABILONIA.Views
+﻿namespace BABILONIA.Views
 {
   partial class UcPedidoCompra
   {
@@ -29,47 +29,41 @@ namespace BABILONIA.Views
       SuspendLayout();
 
       lblTitulo.AutoSize = true;
-      lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-      lblTitulo.ForeColor = Color.FromArgb(30, 30, 60);
+      lblTitulo.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
       lblTitulo.Location = new Point(20, 15);
       lblTitulo.Text = "Pedido de Reposicion";
 
       lblProveedor.AutoSize = true;
-      lblProveedor.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblProveedor.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblProveedor.Location = new Point(20, 65);
       lblProveedor.Text = "Proveedor:";
 
       cmbProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
-      cmbProveedor.Font = new Font("Segoe UI", 11F);
+      cmbProveedor.Font = new Font("Microsoft Sans Serif", 8.25F);
       cmbProveedor.Location = new Point(20, 87);
       cmbProveedor.Size = new Size(350, 28);
 
       lblProducto.AutoSize = true;
-      lblProducto.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblProducto.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblProducto.Location = new Point(20, 135);
       lblProducto.Text = "Producto (ordenados por stock critico):";
 
       cmbProducto.DropDownStyle = ComboBoxStyle.DropDownList;
-      cmbProducto.Font = new Font("Segoe UI", 11F);
+      cmbProducto.Font = new Font("Microsoft Sans Serif", 8.25F);
       cmbProducto.Location = new Point(20, 157);
       cmbProducto.Size = new Size(400, 28);
 
-      nudCantidad.Font = new Font("Segoe UI", 11F);
+      nudCantidad.Font = new Font("Microsoft Sans Serif", 8.25F);
       nudCantidad.Location = new Point(435, 157);
       nudCantidad.Minimum = 1;
       nudCantidad.Maximum = 999;
       nudCantidad.Value = 10;
       nudCantidad.Size = new Size(80, 28);
 
-      btnAgregarItem.BackColor = Color.FromArgb(40, 167, 69);
-      btnAgregarItem.FlatAppearance.BorderSize = 0;
-      btnAgregarItem.FlatStyle = FlatStyle.Flat;
-      btnAgregarItem.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-      btnAgregarItem.ForeColor = Color.White;
+      btnAgregarItem.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       btnAgregarItem.Location = new Point(525, 154);
       btnAgregarItem.Size = new Size(110, 32);
       btnAgregarItem.Text = "+ Agregar";
-      btnAgregarItem.UseVisualStyleBackColor = false;
       btnAgregarItem.Click += BtnAgregarItem_Click;
 
       dgvItems.AllowUserToAddRows = false;
@@ -79,19 +73,14 @@ namespace BABILONIA.Views
       dgvItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       dgvItems.Size = new Size(700, 160);
 
-      btnGenerarPedido.BackColor = Color.FromArgb(0, 122, 204);
-      btnGenerarPedido.FlatAppearance.BorderSize = 0;
-      btnGenerarPedido.FlatStyle = FlatStyle.Flat;
-      btnGenerarPedido.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-      btnGenerarPedido.ForeColor = Color.White;
+      btnGenerarPedido.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       btnGenerarPedido.Location = new Point(450, 375);
       btnGenerarPedido.Size = new Size(270, 45);
       btnGenerarPedido.Text = "GENERAR PEDIDO";
-      btnGenerarPedido.UseVisualStyleBackColor = false;
       btnGenerarPedido.Click += BtnGenerarPedido_Click;
 
       lblPedidos.AutoSize = true;
-      lblPedidos.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+      lblPedidos.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblPedidos.Location = new Point(20, 435);
       lblPedidos.Text = "Pedidos existentes:";
 
@@ -104,7 +93,6 @@ namespace BABILONIA.Views
 
       AutoScaleDimensions = new SizeF(7F, 17F);
       AutoScaleMode = AutoScaleMode.Font;
-      BackColor = Color.White;
       Controls.Add(lblTitulo);
       Controls.Add(lblProveedor);
       Controls.Add(cmbProveedor);

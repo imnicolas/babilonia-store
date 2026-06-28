@@ -3,7 +3,7 @@ using ENTITY;
 
 namespace BABILONIA
 {
-  // Shell principal: menú lateral cuyos botones se muestran u ocultan según el Composite de Permisos del usuario
+  // MenuStrip cuyos items se habilitan/deshabilitan segun el Composite de Permisos del usuario
   public partial class DashboardForm : Form
   {
     private Usuario usuarioActual;
@@ -16,39 +16,76 @@ namespace BABILONIA
       formLogin = loginForm;
 
       string roles = string.Join(", ", usuario.Permisos.OfType<Rol>().Select(r => r.Nombre));
-      lblUsuario.Text = $"Usuario: {usuario.Legajo} | {(string.IsNullOrEmpty(roles) ? "Sin rol" : roles)}";
+      lblUsuario.Text = $"Usuario: {usuario.Legajo}  |  Rol: {(string.IsNullOrEmpty(roles) ? "Sin rol asignado" : roles)}";
 
       CargarMenuPorPermisos();
+      CargarVistaPorDefecto();
+    }
+
+    private void CargarMenuPorPermisos()
+    {
+      List<string> permisos;
+      try
+      {
+        permisos = ObtenerTodosLosPermisos();
+      }
+      catch (Exception ex)
+      {
+        lblUsuario.Text += $"  [Error permisos: {ex.Message}]";
+        return;
+      }
+
+      lblUsuario.Text += $"  [{permisos.Count} permisos]";
+
+      // Paso 1: ocultar todos los subitems (igual que VALHALLA oculta todos los botones primero)
+      foreach (ToolStripMenuItem topItem in menuPrincipal.Items.OfType<ToolStripMenuItem>())
+        foreach (ToolStripMenuItem sub in topItem.DropDownItems.OfType<ToolStripMenuItem>())
+          sub.Visible = false;
+
+      // Paso 2: mostrar los subitems que coinciden con permisos del usuario
+      foreach (string permiso in permisos)
+        foreach (ToolStripMenuItem topItem in menuPrincipal.Items.OfType<ToolStripMenuItem>())
+          foreach (ToolStripMenuItem sub in topItem.DropDownItems.OfType<ToolStripMenuItem>())
+            if (sub.Tag is string tag && tag == permiso)
+              sub.Visible = true;
+
+      // Paso 3: items sin Tag siempre visibles (ej: Cerrar Sesion)
+      foreach (ToolStripMenuItem topItem in menuPrincipal.Items.OfType<ToolStripMenuItem>())
+        foreach (ToolStripMenuItem sub in topItem.DropDownItems.OfType<ToolStripMenuItem>())
+          if (!(sub.Tag is string))
+            sub.Visible = true;
+
+      // Paso 4: ocultar item de nivel superior si no tiene ningun subitem visible
+      foreach (ToolStripMenuItem topItem in menuPrincipal.Items.OfType<ToolStripMenuItem>())
+        topItem.Visible = topItem.DropDownItems.OfType<ToolStripMenuItem>().Any(s => s.Visible);
     }
 
     // Recorre el Composite para obtener todos los permisos (directos y los heredados de Roles)
     private List<string> ObtenerTodosLosPermisos()
     {
       List<string> lista = new List<string>();
+      if (usuarioActual.Permisos == null) return lista;
       foreach (ComponenteAcceso comp in usuarioActual.Permisos)
       {
         if (comp is Permiso p)
           lista.Add(p.Nombre);
         else if (comp is Rol r)
           foreach (ComponenteAcceso hijo in r.ObtenerHijos())
-            lista.Add(hijo.Nombre);
+            if (!string.IsNullOrEmpty(hijo.Nombre))
+              lista.Add(hijo.Nombre);
       }
       return lista.Distinct().ToList();
     }
 
-    private void CargarMenuPorPermisos()
+    private void CargarVistaPorDefecto()
     {
       List<string> permisos = ObtenerTodosLosPermisos();
-
-      // Ocultar todos los botones del menú lateral
-      foreach (Control ctrl in panelLateral.Controls)
-        if (ctrl is Button btn) btn.Visible = false;
-
-      // Mostrar solo los que coincidan con un permiso del usuario (via Tag)
-      foreach (string permiso in permisos)
-        foreach (Control ctrl in panelLateral.Controls)
-          if (ctrl is Button btn && btn.Tag?.ToString() == permiso)
-            btn.Visible = true;
+      if (permisos.Contains("Dashboard"))
+      {
+        UcDashboard uc = new UcDashboard();
+        uc.SetUsuario(usuarioActual);
+        CargarVista(uc);
+      }
     }
 
     private void CargarVista(UserControl vista)
@@ -135,9 +172,9 @@ namespace BABILONIA
       CargarVista(uc);
     }
 
-    private void BtnCerrarSesion_Click(object sender, EventArgs e)
+    private void Menu_CerrarSesion_Click(object sender, EventArgs e)
     {
-      DialogResult dr = MessageBox.Show("¿Desea cambiar de usuario?", "Cerrar Sesión",
+      DialogResult dr = MessageBox.Show("¿Desea cambiar de usuario?", "Cerrar Sesion",
         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
       if (dr == DialogResult.Yes)

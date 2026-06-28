@@ -46,9 +46,9 @@ namespace BABILONIA
       }
     }
 
-    private void BtnMostrarOcultar_Click(object sender, EventArgs e)
+    private void ChkMostrar_CheckedChanged(object sender, EventArgs e)
     {
-      txtContraseña.PasswordChar = txtContraseña.PasswordChar == '•' ? '\0' : '•';
+      txtContraseña.PasswordChar = chkMostrar.Checked ? '\0' : '*';
     }
   }
 }

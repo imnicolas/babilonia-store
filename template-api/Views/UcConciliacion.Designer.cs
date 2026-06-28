@@ -1,4 +1,4 @@
-namespace BABILONIA.Views
+﻿namespace BABILONIA.Views
 {
   partial class UcConciliacion
   {
@@ -22,30 +22,24 @@ namespace BABILONIA.Views
       SuspendLayout();
 
       lblTitulo.AutoSize = true;
-      lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-      lblTitulo.ForeColor = Color.FromArgb(30, 30, 60);
+      lblTitulo.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
       lblTitulo.Location = new Point(20, 15);
       lblTitulo.Text = "Conciliacion Diaria de Pagos";
 
       lblFecha.AutoSize = true;
-      lblFecha.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblFecha.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblFecha.Location = new Point(20, 70);
       lblFecha.Text = "Fecha a conciliar:";
 
-      dtpFecha.Font = new Font("Segoe UI", 11F);
+      dtpFecha.Font = new Font("Microsoft Sans Serif", 8.25F);
       dtpFecha.Format = DateTimePickerFormat.Short;
       dtpFecha.Location = new Point(20, 92);
       dtpFecha.Size = new Size(180, 28);
 
-      btnConciliar.BackColor = Color.FromArgb(0, 122, 204);
-      btnConciliar.FlatAppearance.BorderSize = 0;
-      btnConciliar.FlatStyle = FlatStyle.Flat;
-      btnConciliar.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-      btnConciliar.ForeColor = Color.White;
+      btnConciliar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       btnConciliar.Location = new Point(215, 82);
       btnConciliar.Size = new Size(180, 40);
       btnConciliar.Text = "CONCILIAR";
-      btnConciliar.UseVisualStyleBackColor = false;
       btnConciliar.Click += BtnConciliar_Click;
 
       dgvPagos.AllowUserToAddRows = false;
@@ -56,13 +50,12 @@ namespace BABILONIA.Views
       dgvPagos.Size = new Size(800, 310);
 
       lblTotal.AutoSize = true;
-      lblTotal.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+      lblTotal.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
       lblTotal.Location = new Point(20, 480);
       lblTotal.Text = "Total egresos del dia: -";
 
       AutoScaleDimensions = new SizeF(7F, 17F);
       AutoScaleMode = AutoScaleMode.Font;
-      BackColor = Color.White;
       Controls.Add(lblTitulo);
       Controls.Add(lblFecha);
       Controls.Add(dtpFecha);

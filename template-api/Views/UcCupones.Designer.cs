@@ -1,4 +1,4 @@
-namespace BABILONIA.Views
+﻿namespace BABILONIA.Views
 {
   partial class UcCupones
   {
@@ -29,27 +29,26 @@ namespace BABILONIA.Views
       SuspendLayout();
 
       lblTitulo.AutoSize = true;
-      lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-      lblTitulo.ForeColor = Color.FromArgb(30, 30, 60);
+      lblTitulo.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
       lblTitulo.Location = new Point(20, 15);
       lblTitulo.Text = "Cupones de Fidelizacion";
 
       lblCliente.AutoSize = true;
-      lblCliente.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblCliente.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblCliente.Location = new Point(20, 65);
       lblCliente.Text = "Cliente:";
 
       cmbCliente.DropDownStyle = ComboBoxStyle.DropDownList;
-      cmbCliente.Font = new Font("Segoe UI", 11F);
+      cmbCliente.Font = new Font("Microsoft Sans Serif", 8.25F);
       cmbCliente.Location = new Point(20, 87);
       cmbCliente.Size = new Size(400, 28);
 
       lblDescuento.AutoSize = true;
-      lblDescuento.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblDescuento.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblDescuento.Location = new Point(20, 135);
       lblDescuento.Text = "Descuento (%):";
 
-      nudDescuento.Font = new Font("Segoe UI", 11F);
+      nudDescuento.Font = new Font("Microsoft Sans Serif", 8.25F);
       nudDescuento.Location = new Point(20, 157);
       nudDescuento.Minimum = 1;
       nudDescuento.Maximum = 50;
@@ -57,11 +56,11 @@ namespace BABILONIA.Views
       nudDescuento.Size = new Size(90, 28);
 
       lblDias.AutoSize = true;
-      lblDias.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblDias.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblDias.Location = new Point(130, 135);
       lblDias.Text = "Vigencia (dias):";
 
-      nudDias.Font = new Font("Segoe UI", 11F);
+      nudDias.Font = new Font("Microsoft Sans Serif", 8.25F);
       nudDias.Location = new Point(130, 157);
       nudDias.Minimum = 1;
       nudDias.Maximum = 365;
@@ -69,23 +68,18 @@ namespace BABILONIA.Views
       nudDias.Size = new Size(90, 28);
 
       lblDescripcion.AutoSize = true;
-      lblDescripcion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblDescripcion.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblDescripcion.Location = new Point(20, 200);
       lblDescripcion.Text = "Descripcion:";
 
-      txtDescripcion.Font = new Font("Segoe UI", 11F);
+      txtDescripcion.Font = new Font("Microsoft Sans Serif", 8.25F);
       txtDescripcion.Location = new Point(20, 222);
       txtDescripcion.Size = new Size(400, 28);
 
-      btnEmitirCupon.BackColor = Color.FromArgb(0, 122, 204);
-      btnEmitirCupon.FlatAppearance.BorderSize = 0;
-      btnEmitirCupon.FlatStyle = FlatStyle.Flat;
-      btnEmitirCupon.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-      btnEmitirCupon.ForeColor = Color.White;
+      btnEmitirCupon.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       btnEmitirCupon.Location = new Point(20, 270);
       btnEmitirCupon.Size = new Size(200, 40);
       btnEmitirCupon.Text = "EMITIR CUPON";
-      btnEmitirCupon.UseVisualStyleBackColor = false;
       btnEmitirCupon.Click += BtnEmitirCupon_Click;
 
       dgvCupones.AllowUserToAddRows = false;
@@ -97,7 +91,6 @@ namespace BABILONIA.Views
 
       AutoScaleDimensions = new SizeF(7F, 17F);
       AutoScaleMode = AutoScaleMode.Font;
-      BackColor = Color.White;
       Controls.Add(lblTitulo);
       Controls.Add(lblCliente);
       Controls.Add(cmbCliente);

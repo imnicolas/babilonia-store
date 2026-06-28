@@ -1,4 +1,4 @@
-namespace BABILONIA.Views
+﻿namespace BABILONIA.Views
 {
   partial class UcRecepcionMercaderia
   {
@@ -24,23 +24,22 @@ namespace BABILONIA.Views
       SuspendLayout();
 
       lblTitulo.AutoSize = true;
-      lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-      lblTitulo.ForeColor = Color.FromArgb(30, 30, 60);
+      lblTitulo.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
       lblTitulo.Location = new Point(20, 15);
       lblTitulo.Text = "Recepcion de Mercaderia";
 
       lblPedidos.AutoSize = true;
-      lblPedidos.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblPedidos.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblPedidos.Location = new Point(20, 65);
       lblPedidos.Text = "Pedidos Pendientes:";
 
-      lstPedidos.Font = new Font("Segoe UI", 11F);
+      lstPedidos.Font = new Font("Microsoft Sans Serif", 8.25F);
       lstPedidos.Location = new Point(20, 87);
       lstPedidos.Size = new Size(200, 150);
       lstPedidos.SelectedIndexChanged += LstPedidos_SelectedIndexChanged;
 
       lblInfoPedido.AutoSize = true;
-      lblInfoPedido.Font = new Font("Segoe UI", 10F, FontStyle.Italic);
+      lblInfoPedido.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Italic);
       lblInfoPedido.ForeColor = Color.DimGray;
       lblInfoPedido.Location = new Point(235, 95);
       lblInfoPedido.Size = new Size(500, 20);
@@ -52,28 +51,22 @@ namespace BABILONIA.Views
       dgvRecepcion.Size = new Size(800, 200);
 
       lblObservaciones.AutoSize = true;
-      lblObservaciones.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblObservaciones.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblObservaciones.Location = new Point(20, 468);
       lblObservaciones.Text = "Observaciones:";
 
-      txtObservaciones.Font = new Font("Segoe UI", 11F);
+      txtObservaciones.Font = new Font("Microsoft Sans Serif", 8.25F);
       txtObservaciones.Location = new Point(20, 490);
       txtObservaciones.Size = new Size(500, 28);
 
-      btnRecepcionar.BackColor = Color.FromArgb(0, 122, 204);
-      btnRecepcionar.FlatAppearance.BorderSize = 0;
-      btnRecepcionar.FlatStyle = FlatStyle.Flat;
-      btnRecepcionar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-      btnRecepcionar.ForeColor = Color.White;
+      btnRecepcionar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       btnRecepcionar.Location = new Point(560, 480);
       btnRecepcionar.Size = new Size(260, 45);
       btnRecepcionar.Text = "RECEPCIONAR MERCADERIA";
-      btnRecepcionar.UseVisualStyleBackColor = false;
       btnRecepcionar.Click += BtnRecepcionar_Click;
 
       AutoScaleDimensions = new SizeF(7F, 17F);
       AutoScaleMode = AutoScaleMode.Font;
-      BackColor = Color.White;
       Controls.Add(lblTitulo);
       Controls.Add(lblPedidos);
       Controls.Add(lstPedidos);

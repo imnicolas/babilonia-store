@@ -1,4 +1,4 @@
-namespace BABILONIA.Views
+﻿namespace BABILONIA.Views
 {
   partial class UcPostVenta
   {
@@ -23,55 +23,48 @@ namespace BABILONIA.Views
       SuspendLayout();
 
       lblTitulo.AutoSize = true;
-      lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-      lblTitulo.ForeColor = Color.FromArgb(30, 30, 60);
+      lblTitulo.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
       lblTitulo.Location = new Point(20, 15);
       lblTitulo.Text = "Post Venta - Cambio de Calzado";
 
       lblVenta.AutoSize = true;
-      lblVenta.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblVenta.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblVenta.Location = new Point(20, 70);
       lblVenta.Text = "Numero de Venta:";
 
       cmbVenta.DropDownStyle = ComboBoxStyle.DropDownList;
-      cmbVenta.Font = new Font("Segoe UI", 11F);
+      cmbVenta.Font = new Font("Microsoft Sans Serif", 8.25F);
       cmbVenta.Location = new Point(20, 92);
       cmbVenta.Size = new Size(200, 28);
 
       lblDevuelto.AutoSize = true;
-      lblDevuelto.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblDevuelto.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblDevuelto.Location = new Point(20, 145);
       lblDevuelto.Text = "Producto a devolver:";
 
       cmbDevuelto.DropDownStyle = ComboBoxStyle.DropDownList;
-      cmbDevuelto.Font = new Font("Segoe UI", 11F);
+      cmbDevuelto.Font = new Font("Microsoft Sans Serif", 8.25F);
       cmbDevuelto.Location = new Point(20, 167);
       cmbDevuelto.Size = new Size(400, 28);
 
       lblNuevo.AutoSize = true;
-      lblNuevo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblNuevo.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblNuevo.Location = new Point(20, 220);
       lblNuevo.Text = "Producto de reemplazo:";
 
       cmbNuevo.DropDownStyle = ComboBoxStyle.DropDownList;
-      cmbNuevo.Font = new Font("Segoe UI", 11F);
+      cmbNuevo.Font = new Font("Microsoft Sans Serif", 8.25F);
       cmbNuevo.Location = new Point(20, 242);
       cmbNuevo.Size = new Size(400, 28);
 
-      btnRegistrarCambio.BackColor = Color.FromArgb(0, 122, 204);
-      btnRegistrarCambio.FlatAppearance.BorderSize = 0;
-      btnRegistrarCambio.FlatStyle = FlatStyle.Flat;
-      btnRegistrarCambio.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-      btnRegistrarCambio.ForeColor = Color.White;
+      btnRegistrarCambio.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       btnRegistrarCambio.Location = new Point(20, 305);
       btnRegistrarCambio.Size = new Size(260, 45);
       btnRegistrarCambio.Text = "REGISTRAR CAMBIO";
-      btnRegistrarCambio.UseVisualStyleBackColor = false;
       btnRegistrarCambio.Click += BtnRegistrarCambio_Click;
 
       AutoScaleDimensions = new SizeF(7F, 17F);
       AutoScaleMode = AutoScaleMode.Font;
-      BackColor = Color.White;
       Controls.Add(lblTitulo);
       Controls.Add(lblVenta);
       Controls.Add(cmbVenta);

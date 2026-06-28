@@ -50,6 +50,13 @@ namespace MAPPER
         }
       }
 
+      // Fallback: si el nodo <permisos> esta vacio pero idRol tiene valor, resolver desde la lista de roles
+      if (usuario.Permisos.Count == 0 && usuario.IdRol > 0)
+      {
+        Rol rolFallback = todosRoles.FirstOrDefault(r => r.Id == usuario.IdRol);
+        if (rolFallback != null) usuario.Permisos.Add(rolFallback);
+      }
+
       return usuario;
     }
 

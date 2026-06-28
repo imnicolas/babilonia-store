@@ -1,4 +1,4 @@
-namespace BABILONIA.Views
+﻿namespace BABILONIA.Views
 {
   partial class UcDashboard
   {
@@ -31,24 +31,17 @@ namespace BABILONIA.Views
       SuspendLayout();
 
       lblTitulo.AutoSize = true;
-      lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-      lblTitulo.ForeColor = Color.FromArgb(30, 30, 60);
+      lblTitulo.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
       lblTitulo.Location = new Point(20, 15);
       lblTitulo.Text = "Dashboard - Babilonia Calzados";
 
-      btnRefrescar.BackColor = Color.FromArgb(40, 167, 69);
-      btnRefrescar.FlatAppearance.BorderSize = 0;
-      btnRefrescar.FlatStyle = FlatStyle.Flat;
-      btnRefrescar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-      btnRefrescar.ForeColor = Color.White;
+      btnRefrescar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       btnRefrescar.Location = new Point(720, 10);
       btnRefrescar.Size = new Size(120, 35);
       btnRefrescar.Text = "↻ Refrescar";
-      btnRefrescar.UseVisualStyleBackColor = false;
       btnRefrescar.Click += BtnRefrescar_Click;
 
       // Panel de indicadores
-      panelIndicadores.BackColor = Color.FromArgb(240, 248, 255);
       panelIndicadores.BorderStyle = BorderStyle.FixedSingle;
       panelIndicadores.Location = new Point(20, 65);
       panelIndicadores.Size = new Size(830, 120);
@@ -67,7 +60,7 @@ namespace BABILONIA.Views
       ConfigurarLabelIndicador(lblPedidosPendientes, "Pedidos pendientes: -", new Point(430, 75));
 
       lblTopProductos.AutoSize = true;
-      lblTopProductos.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+      lblTopProductos.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblTopProductos.Location = new Point(20, 205);
       lblTopProductos.Text = "Top 5 productos mas vendidos:";
 
@@ -79,7 +72,7 @@ namespace BABILONIA.Views
       dgvTopProductos.Size = new Size(380, 140);
 
       lblUltimasVentas.AutoSize = true;
-      lblUltimasVentas.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+      lblUltimasVentas.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblUltimasVentas.Location = new Point(420, 205);
       lblUltimasVentas.Text = "Ultimas 10 ventas:";
 
@@ -92,7 +85,6 @@ namespace BABILONIA.Views
 
       AutoScaleDimensions = new SizeF(7F, 17F);
       AutoScaleMode = AutoScaleMode.Font;
-      BackColor = Color.White;
       Controls.Add(lblTitulo);
       Controls.Add(btnRefrescar);
       Controls.Add(panelIndicadores);
@@ -112,7 +104,7 @@ namespace BABILONIA.Views
     private void ConfigurarLabelIndicador(Label lbl, string texto, Point ubicacion)
     {
       lbl.AutoSize = true;
-      lbl.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lbl.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lbl.Location = ubicacion;
       lbl.Text = texto;
     }

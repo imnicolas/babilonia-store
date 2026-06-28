@@ -12,110 +12,85 @@ namespace BABILONIA
 
     private void InitializeComponent()
     {
-      panelHeader = new Panel();
-      lblTitulo = new Label();
-      lblSubtitulo = new Label();
+      grpAcceso = new GroupBox();
       lblLegajo = new Label();
       txtLegajo = new TextBox();
       lblContraseña = new Label();
       txtContraseña = new TextBox();
-      btnMostrarOcultar = new Button();
+      chkMostrar = new CheckBox();
       btnIngresar = new Button();
-      panelHeader.SuspendLayout();
+      lblTitulo = new Label();
+      grpAcceso.SuspendLayout();
       SuspendLayout();
 
-      panelHeader.BackColor = Color.FromArgb(30, 30, 60);
-      panelHeader.Controls.Add(lblTitulo);
-      panelHeader.Controls.Add(lblSubtitulo);
-      panelHeader.Dock = DockStyle.Top;
-      panelHeader.Size = new Size(440, 110);
-      panelHeader.TabIndex = 0;
-
-      lblTitulo.AutoSize = true;
-      lblTitulo.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-      lblTitulo.ForeColor = Color.White;
-      lblTitulo.Location = new Point(35, 18);
+      lblTitulo.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold);
+      lblTitulo.Location = new Point(12, 12);
+      lblTitulo.Size = new Size(358, 28);
       lblTitulo.Text = "Babilonia Calzados";
+      lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
 
-      lblSubtitulo.AutoSize = true;
-      lblSubtitulo.Font = new Font("Segoe UI", 10F);
-      lblSubtitulo.ForeColor = Color.LightGray;
-      lblSubtitulo.Location = new Point(90, 68);
-      lblSubtitulo.Text = "Gestion de Calzado y Ventas";
+      grpAcceso.Location = new Point(12, 48);
+      grpAcceso.Size = new Size(358, 170);
+      grpAcceso.Text = "Ingreso al sistema";
+      grpAcceso.Controls.Add(lblLegajo);
+      grpAcceso.Controls.Add(txtLegajo);
+      grpAcceso.Controls.Add(lblContraseña);
+      grpAcceso.Controls.Add(txtContraseña);
+      grpAcceso.Controls.Add(chkMostrar);
 
       lblLegajo.AutoSize = true;
-      lblLegajo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-      lblLegajo.Location = new Point(70, 140);
+      lblLegajo.Location = new Point(16, 30);
       lblLegajo.Text = "Legajo:";
 
-      txtLegajo.Font = new Font("Segoe UI", 12F);
-      txtLegajo.Location = new Point(70, 162);
-      txtLegajo.Size = new Size(300, 29);
+      txtLegajo.Location = new Point(16, 48);
+      txtLegajo.Size = new Size(320, 20);
       txtLegajo.TabIndex = 1;
 
       lblContraseña.AutoSize = true;
-      lblContraseña.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-      lblContraseña.Location = new Point(70, 205);
+      lblContraseña.Location = new Point(16, 82);
       lblContraseña.Text = "Contraseña:";
 
-      txtContraseña.Font = new Font("Segoe UI", 12F);
-      txtContraseña.Location = new Point(70, 227);
-      txtContraseña.PasswordChar = '•';
-      txtContraseña.Size = new Size(258, 29);
+      txtContraseña.Location = new Point(16, 100);
+      txtContraseña.PasswordChar = '*';
+      txtContraseña.Size = new Size(320, 20);
       txtContraseña.TabIndex = 2;
 
-      btnMostrarOcultar.Cursor = Cursors.Hand;
-      btnMostrarOcultar.FlatStyle = FlatStyle.Flat;
-      btnMostrarOcultar.Location = new Point(333, 227);
-      btnMostrarOcultar.Size = new Size(37, 29);
-      btnMostrarOcultar.Text = "👁";
-      btnMostrarOcultar.TabIndex = 3;
-      btnMostrarOcultar.Click += BtnMostrarOcultar_Click;
+      chkMostrar.AutoSize = true;
+      chkMostrar.Location = new Point(16, 132);
+      chkMostrar.TabIndex = 3;
+      chkMostrar.Text = "Mostrar contraseña";
+      chkMostrar.CheckedChanged += ChkMostrar_CheckedChanged;
 
-      btnIngresar.BackColor = Color.FromArgb(0, 122, 204);
-      btnIngresar.Cursor = Cursors.Hand;
-      btnIngresar.FlatAppearance.BorderSize = 0;
-      btnIngresar.FlatStyle = FlatStyle.Flat;
-      btnIngresar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-      btnIngresar.ForeColor = Color.White;
-      btnIngresar.Location = new Point(70, 285);
-      btnIngresar.Size = new Size(300, 45);
+      btnIngresar.Location = new Point(12, 232);
+      btnIngresar.Size = new Size(358, 28);
       btnIngresar.TabIndex = 4;
-      btnIngresar.Text = "INGRESAR";
-      btnIngresar.UseVisualStyleBackColor = false;
+      btnIngresar.Text = "Ingresar";
       btnIngresar.Click += BtnIngresar_Click;
 
       AcceptButton = btnIngresar;
-      AutoScaleDimensions = new SizeF(7F, 17F);
+      AutoScaleDimensions = new SizeF(6F, 13F);
       AutoScaleMode = AutoScaleMode.Font;
-      BackColor = Color.White;
-      ClientSize = new Size(440, 380);
+      ClientSize = new Size(382, 272);
+      Controls.Add(lblTitulo);
+      Controls.Add(grpAcceso);
       Controls.Add(btnIngresar);
-      Controls.Add(btnMostrarOcultar);
-      Controls.Add(txtContraseña);
-      Controls.Add(lblContraseña);
-      Controls.Add(txtLegajo);
-      Controls.Add(lblLegajo);
-      Controls.Add(panelHeader);
-      Font = new Font("Segoe UI", 10F);
-      FormBorderStyle = FormBorderStyle.FixedSingle;
+      Font = new Font("Microsoft Sans Serif", 8.25F);
+      FormBorderStyle = FormBorderStyle.FixedDialog;
       MaximizeBox = false;
       StartPosition = FormStartPosition.CenterScreen;
       Text = "Babilonia Calzados - Acceso";
-      panelHeader.ResumeLayout(false);
-      panelHeader.PerformLayout();
+      grpAcceso.ResumeLayout(false);
+      grpAcceso.PerformLayout();
       ResumeLayout(false);
-      PerformLayout();
     }
 
-    private Panel panelHeader;
+    private GroupBox grpAcceso;
     private Label lblTitulo;
-    private Label lblSubtitulo;
     private Label lblLegajo;
     private TextBox txtLegajo;
     private Label lblContraseña;
     private TextBox txtContraseña;
-    private Button btnMostrarOcultar;
+    private CheckBox chkMostrar;
     private Button btnIngresar;
   }
 }

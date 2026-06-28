@@ -1,4 +1,4 @@
-namespace BABILONIA.Views
+﻿namespace BABILONIA.Views
 {
   partial class UcGestionUsuarios
   {
@@ -30,99 +30,82 @@ namespace BABILONIA.Views
       SuspendLayout();
 
       lblTitulo.AutoSize = true;
-      lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-      lblTitulo.ForeColor = Color.FromArgb(30, 30, 60);
+      lblTitulo.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
       lblTitulo.Location = new Point(20, 15);
       lblTitulo.Text = "Gestion de Usuarios";
 
       lblUsuarios.AutoSize = true;
-      lblUsuarios.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblUsuarios.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblUsuarios.Location = new Point(20, 65);
       lblUsuarios.Text = "Usuarios:";
 
-      lstUsuarios.Font = new Font("Segoe UI", 10F);
+      lstUsuarios.Font = new Font("Microsoft Sans Serif", 8.25F);
       lstUsuarios.Location = new Point(20, 85);
       lstUsuarios.Size = new Size(200, 280);
       lstUsuarios.SelectedIndexChanged += LstUsuarios_SelectedIndexChanged;
 
       lblLegajo.AutoSize = true;
-      lblLegajo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblLegajo.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblLegajo.Location = new Point(240, 65);
       lblLegajo.Text = "Legajo:";
 
-      txtLegajo.Font = new Font("Segoe UI", 11F);
+      txtLegajo.Font = new Font("Microsoft Sans Serif", 8.25F);
       txtLegajo.Location = new Point(240, 85);
       txtLegajo.Size = new Size(230, 28);
 
       lblEmail.AutoSize = true;
-      lblEmail.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblEmail.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblEmail.Location = new Point(240, 130);
       lblEmail.Text = "Email:";
 
-      txtEmail.Font = new Font("Segoe UI", 11F);
+      txtEmail.Font = new Font("Microsoft Sans Serif", 8.25F);
       txtEmail.Location = new Point(240, 150);
       txtEmail.Size = new Size(230, 28);
 
       lblRol.AutoSize = true;
-      lblRol.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblRol.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblRol.Location = new Point(240, 195);
       lblRol.Text = "Rol asignado:";
 
       cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
-      cmbRol.Font = new Font("Segoe UI", 11F);
+      cmbRol.Font = new Font("Microsoft Sans Serif", 8.25F);
       cmbRol.Location = new Point(240, 215);
       cmbRol.Size = new Size(230, 28);
 
       chkBloqueado.AutoSize = true;
-      chkBloqueado.Font = new Font("Segoe UI", 10F);
+      chkBloqueado.Font = new Font("Microsoft Sans Serif", 8.25F);
       chkBloqueado.Location = new Point(240, 265);
       chkBloqueado.Text = "Usuario bloqueado";
 
-      btnGuardar.BackColor = Color.FromArgb(0, 122, 204);
-      btnGuardar.FlatAppearance.BorderSize = 0;
-      btnGuardar.FlatStyle = FlatStyle.Flat;
-      btnGuardar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-      btnGuardar.ForeColor = Color.White;
+      btnGuardar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       btnGuardar.Location = new Point(240, 305);
       btnGuardar.Size = new Size(110, 38);
       btnGuardar.Text = "GUARDAR";
-      btnGuardar.UseVisualStyleBackColor = false;
       btnGuardar.Click += BtnGuardar_Click;
 
-      btnNuevo.BackColor = Color.FromArgb(100, 100, 100);
-      btnNuevo.FlatAppearance.BorderSize = 0;
-      btnNuevo.FlatStyle = FlatStyle.Flat;
-      btnNuevo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-      btnNuevo.ForeColor = Color.White;
+      btnNuevo.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       btnNuevo.Location = new Point(360, 305);
       btnNuevo.Size = new Size(110, 38);
       btnNuevo.Text = "NUEVO";
-      btnNuevo.UseVisualStyleBackColor = false;
       btnNuevo.Click += BtnNuevo_Click;
 
-      btnDesbloquear.BackColor = Color.FromArgb(40, 167, 69);
-      btnDesbloquear.FlatAppearance.BorderSize = 0;
-      btnDesbloquear.FlatStyle = FlatStyle.Flat;
-      btnDesbloquear.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-      btnDesbloquear.ForeColor = Color.White;
+      btnDesbloquear.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       btnDesbloquear.Location = new Point(240, 355);
       btnDesbloquear.Size = new Size(230, 38);
       btnDesbloquear.Text = "DESBLOQUEAR USUARIO";
-      btnDesbloquear.UseVisualStyleBackColor = false;
       btnDesbloquear.Click += BtnDesbloquear_Click;
 
       lblArbol.AutoSize = true;
-      lblArbol.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+      lblArbol.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
       lblArbol.Location = new Point(490, 65);
       lblArbol.Text = "Arbol de roles y permisos (Composite):";
 
-      tvPermisos.Font = new Font("Segoe UI", 10F);
+      tvPermisos.Font = new Font("Microsoft Sans Serif", 8.25F);
       tvPermisos.Location = new Point(490, 85);
       tvPermisos.Size = new Size(340, 450);
 
       AutoScaleDimensions = new SizeF(7F, 17F);
       AutoScaleMode = AutoScaleMode.Font;
-      BackColor = Color.White;
       Controls.Add(lblTitulo);
       Controls.Add(lblUsuarios);
       Controls.Add(lstUsuarios);
